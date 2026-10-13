@@ -5,22 +5,35 @@ public class ej11 {
         Scanner input = new Scanner(System.in);
         char[][] table;
         table = new char[8][8];
-        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, getRow = 0, f = 0, c = 0;
+        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, getRow = 0, f = 0, c = 0, selectLevel = 0, level = 0;
         boolean gameOver = false;
+        System.out.print("Selecciona el nivel de dificultad 1-5 siendo 5 el nivel más difícil: ");
+        selectLevel = input.nextInt();
+        if (selectLevel >=4){
+            level = 5;
+        } else if (selectLevel >= 3) {
+            level = 10;
+        } else if (selectLevel >= 1) {
+            level = 20;
+        }
+        addShips(table, level);
         for (int fila = 0; fila < table.length; fila++) {
             for (int colum = 0; colum < table[0].length; colum++) {
                 table[fila][colum] = ' ';
             }
         }
-        for (int i = 1; i <= 10; i++) {
-            f = (int) (Math.random() * 8);
-            c = (int) (Math.random() * 8);
-            table[f][c] = ' ';
-        }
+        System.out.println("-------------------------------------");
         while (!gameOver) {
             printTable(table);
             int row = getRow(input);
             int col = getfil(input);
+
+        }
+    }
+    static void addShips(char[][] tabla, int level){
+        int numShips = 0;
+        while (numShips < level ){
+
         }
     }
 
@@ -38,8 +51,8 @@ public class ej11 {
                 System.out.print(tabla[row][col] + " | ");
             }
             System.out.println();
-
         }
+        System.out.println("-------------------------------------");
 
 
     }
