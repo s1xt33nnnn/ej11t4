@@ -10,28 +10,39 @@ public class ej11 {
                 table[fila][col] = ' ';
             }
         }
-        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, selectLevel = 0, numship;
+        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, selectLevel = 0, numship = 0;
         boolean gameOver = false;
         System.out.print("Selecciona el nivel de dificultad 1-5 siendo 5 el nivel más difícil: ");
         selectLevel = input.nextInt();
-        if (selectLevel >=4){
-            numship = 5;
-        } else if (selectLevel >= 3) {
+        if (selectLevel ==5){
             numship = 10;
-        } else if (selectLevel >= 1) {
+        } else if (selectLevel == 4) {
+            numship = 15;
+        } else if (selectLevel == 3) {
             numship = 20;
+        } else if (selectLevel == 2) {
+            numship = 25;
+        } else if (selectLevel == 1) {
+            numship = 30;
         }
+
+        addShips(table, numship);
         System.out.println("-------------------------------------");
         while (!gameOver) {
-            printTable(table,false);
+            printTable(table,true);
             int row = getRow(input);
             int col = getfil(input);
+            if (table[row][col] == 'S') {
+                table[row][col] = 'X';
+            } else  {
+                table[row][col] = 'O';
+            }
 
         }
     }
-    static void addShips(char[][] tabla, int level){
+    static void addShips(char[][] tabla, int numship){
         int numShips = 0;
-        while (numShips < level ){
+        while (numShips < numship ){
             int row = (int) (Math.random()* tabla.length);
             int col = (int) (Math.random()* tabla[0].length);
             if (tabla[row][col] != 'S'){
@@ -53,7 +64,7 @@ public class ej11 {
             System.out.print("| " + ((char) (65 + row)) + " |");
             for (int col = 0; col < tabla[0].length; col++) {
                 if (debug){
-                    System.out.print(tabla[row][col] + " ");
+                    System.out.print(tabla[row][col]);
                 } else {
                     if (tabla[row][col] == 'S');{
                         System.out.print(" ");
