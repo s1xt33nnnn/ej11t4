@@ -14,7 +14,7 @@ public class ej11 {
         boolean gameOver = false;
         System.out.print("Selecciona el nivel de dificultad 1-5 siendo 5 el nivel más difícil: ");
         selectLevel = input.nextInt();
-        if (selectLevel ==5){
+        if (selectLevel == 5) {
             numship = 10;
         } else if (selectLevel == 4) {
             numship = 15;
@@ -27,25 +27,33 @@ public class ej11 {
         }
 
         addShips(table, numship);
-        System.out.println("-------------------------------------");
         while (!gameOver) {
-            printTable(table,true);
+            System.out.println("-------------------------------------");
+            printTable(table, false);
             int row = getRow(input);
             int col = getfil(input);
             if (table[row][col] == 'S') {
                 table[row][col] = 'X';
-            } else  {
+            } else {
                 table[row][col] = 'O';
             }
 
         }
+        if (gameOver) {
+            System.out.println("  ____    _    __  __ _____  __        _____ _   _ ");
+            System.out.println(" / ___|  / \\  |  \\/  | ____| \\ \\      / /_ _| \\ | |");
+            System.out.println("| |  _  / _ \\ | |\\/| |  _|    \\ \\ /\\ / / | ||  \\| |");
+            System.out.println("| |_| |/ ___ \\| |  | | |___    \\ V  V /  | || |\\  |");
+            System.out.println(" \\____/_/   \\_\\_|  |_|_____|    \\_/\\_/  |___|_| \\_|");
+        }
     }
-    static void addShips(char[][] tabla, int numship){
+
+    static void addShips(char[][] tabla, int numship) {
         int numShips = 0;
-        while (numShips < numship ){
-            int row = (int) (Math.random()* tabla.length);
-            int col = (int) (Math.random()* tabla[0].length);
-            if (tabla[row][col] != 'S'){
+        while (numShips <= numship) {
+            int row = (int) (Math.random() * tabla.length);
+            int col = (int) (Math.random() * tabla[0].length);
+            if (tabla[row][col] != 'S') {
                 tabla[row][col] = 'S';
                 numShips++;
             }
@@ -61,16 +69,18 @@ public class ej11 {
         char letter = 'A';
         for (int row = 0; row < tabla.length; row++) {
             System.out.println("|---|---|---|---|---|---|---|---|---|");
-            System.out.print("| " + ((char) (65 + row)) + " |");
+            System.out.print("| " + ((char) (65 + row)) + " | ");
             for (int col = 0; col < tabla[0].length; col++) {
-                if (debug){
+                if (debug) {
                     System.out.print(tabla[row][col]);
                 } else {
-                    if (tabla[row][col] == 'S');{
+                    if (tabla[row][col] == 'S') {
                         System.out.print(" ");
+                    }else {
+                        System.out.print(tabla[row][col]);
                     }
                 }
-                System.out.print(tabla[row][col] + " |");
+                System.out.print(" | ");
             }
             System.out.println();
         }
