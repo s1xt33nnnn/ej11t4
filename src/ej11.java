@@ -50,7 +50,7 @@ public class ej11 {
             System.out.println("| |  _  / _ \\ | |\\/| |  _|    \\ \\ /\\ / / | ||  \\| |");
             System.out.println("| |_| |/ ___ \\| |  | | |___    \\ V  V /  | || |\\  |");
             System.out.println(" \\____/_/   \\_\\_|  |_|_____|    \\_/\\_/  |___|_| \\_|");
-            System.out.println("You have fired" + shots + "times to win");
+            System.out.println("You have fired " + shots + "times to win");
         }
     }
 
