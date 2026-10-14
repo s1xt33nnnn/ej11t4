@@ -32,25 +32,31 @@ public class ej11 {
             printTable(table, false);
             int row = getRow(input);
             int col = getFil(input);
+            shots++;
             if (table[row][col] == 'S') {
                 table[row][col] = 'X';
+                sunk_ship++;
+                if (sunk_ship == numShip){
+                  gameOver = true;
+                }
             } else {
                 table[row][col] = 'O';
             }
 
         }
-        if (gameOver) {
+        if (sunk_ship == numShip) {
             System.out.println("  ____    _    __  __ _____  __        _____ _   _ ");
             System.out.println(" / ___|  / \\  |  \\/  | ____| \\ \\      / /_ _| \\ | |");
             System.out.println("| |  _  / _ \\ | |\\/| |  _|    \\ \\ /\\ / / | ||  \\| |");
             System.out.println("| |_| |/ ___ \\| |  | | |___    \\ V  V /  | || |\\  |");
             System.out.println(" \\____/_/   \\_\\_|  |_|_____|    \\_/\\_/  |___|_| \\_|");
+            System.out.println("You have fired" + shots + "times to win");
         }
     }
 
     static void addShips(char[][] tabla, int numShip) {
         int numShips = 0;
-        while (numShips <= numShip) {
+        while (numShips < numShip) {
             int row = (int) (Math.random() * tabla.length);
             int col = (int) (Math.random() * tabla[0].length);
             if (tabla[row][col] != 'S') {
