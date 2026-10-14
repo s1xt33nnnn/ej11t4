@@ -10,28 +10,28 @@ public class ej11 {
                 table[fila][col] = ' ';
             }
         }
-        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, selectLevel = 0, numship = 0;
+        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, selectLevel, numShip = 0;
         boolean gameOver = false;
         System.out.print("Selecciona el nivel de dificultad 1-5 siendo 5 el nivel más difícil: ");
         selectLevel = input.nextInt();
         if (selectLevel == 5) {
-            numship = 10;
+            numShip = 10;
         } else if (selectLevel == 4) {
-            numship = 15;
+            numShip = 15;
         } else if (selectLevel == 3) {
-            numship = 20;
+            numShip = 20;
         } else if (selectLevel == 2) {
-            numship = 25;
+            numShip = 25;
         } else if (selectLevel == 1) {
-            numship = 30;
+            numShip = 30;
         }
 
-        addShips(table, numship);
+        addShips(table, numShip);
         while (!gameOver) {
             System.out.println("-------------------------------------");
             printTable(table, false);
             int row = getRow(input);
-            int col = getfil(input);
+            int col = getFil(input);
             if (table[row][col] == 'S') {
                 table[row][col] = 'X';
             } else {
@@ -48,9 +48,9 @@ public class ej11 {
         }
     }
 
-    static void addShips(char[][] tabla, int numship) {
+    static void addShips(char[][] tabla, int numShip) {
         int numShips = 0;
-        while (numShips <= numship) {
+        while (numShips <= numShip) {
             int row = (int) (Math.random() * tabla.length);
             int col = (int) (Math.random() * tabla[0].length);
             if (tabla[row][col] != 'S') {
@@ -97,7 +97,7 @@ public class ej11 {
         return row;
     }
 
-    static int getfil(Scanner input) {
+    static int getFil(Scanner input) {
         System.out.print("Dame el numero de la columna: ");
         int col = input.nextInt() - 1;
         return col;
