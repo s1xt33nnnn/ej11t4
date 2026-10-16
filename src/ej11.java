@@ -16,7 +16,7 @@ public class ej11 {
         while (!gameOver) {
             System.out.println("-------------------------------------");
             printTable(table, true);
-            if (sunk){
+            if (sunk) {
                 System.out.println("You have sunk a Ship");
             }
             int row = getRow(input);
@@ -25,13 +25,13 @@ public class ej11 {
             if (table[row][col] == 'S') {
                 table[row][col] = 'X';
                 sunkShip++;
-                sunk=true;
-                if (sunkShip == numShip){
-                  gameOver = true;
+                sunk = true;
+                if (sunkShip == numShip) {
+                    gameOver = true;
                 }
             } else {
                 table[row][col] = 'O';
-                sunk=false;
+                sunk = false;
             }
 
         }
@@ -100,7 +100,7 @@ public class ej11 {
                 } else {
                     if (tabla[row][col] == 'S') {
                         System.out.print(" ");
-                    }else {
+                    } else {
                         System.out.print(tabla[row][col]);
                     }
 
