@@ -5,15 +5,51 @@ public class ej11 {
         Scanner input = new Scanner(System.in);
         char[][] table;
         table = new char[8][8];
-        for (int fila = 0; fila < table.length; fila++) {
-            for (int col = 0; col < table[0].length; col++) {
-                table[fila][col] = ' ';
-            }
-        }
-        int cont = 0, shots = 0, sunk_ship = 0, ship = 0, selectLevel, numShip = 0;
+        initMatrix(table);
+        int shots = 0, sunkShip = 0, selectLevel, numShip = 0;
         boolean gameOver = false;
         System.out.print("Selecciona el nivel de dificultad 1-5 siendo 5 el nivel más difícil: ");
         selectLevel = input.nextInt();
+        numShip = levelSelection(selectLevel, numShip);
+        boolean sunk = false;
+        addShips(table, numShip);
+        while (!gameOver) {
+            System.out.println("-------------------------------------");
+            printTable(table, true);
+            if (sunk){
+                System.out.println("You have sunk a Ship");
+            }
+            int row = getRow(input);
+            int col = getFil(input);
+            shots++;
+            if (table[row][col] == 'S') {
+                table[row][col] = 'X';
+                sunkShip++;
+                sunk=true;
+                if (sunkShip == numShip){
+                  gameOver = true;
+                }
+            } else {
+                table[row][col] = 'O';
+                sunk=false;
+            }
+
+        }
+        if (sunkShip == numShip) {
+            printGameWin(shots);
+        }
+    }
+
+    private static void printGameWin(int shots) {
+        System.out.println("  ____    _    __  __ _____  __        _____ _   _ ");
+        System.out.println(" / ___|  / \\  |  \\/  | ____| \\ \\      / /_ _| \\ | |");
+        System.out.println("| |  _  / _ \\ | |\\/| |  _|    \\ \\ /\\ / / | ||  \\| |");
+        System.out.println("| |_| |/ ___ \\| |  | | |___    \\ V  V /  | || |\\  |");
+        System.out.println(" \\____/_/   \\_\\_|  |_|_____|    \\_/\\_/  |___|_| \\_|");
+        System.out.println("You have fired " + shots + " times to win");
+    }
+
+    private static int levelSelection(int selectLevel, int numShip) {
         if (selectLevel == 5) {
             numShip = 10;
         } else if (selectLevel == 4) {
@@ -25,32 +61,14 @@ public class ej11 {
         } else if (selectLevel == 1) {
             numShip = 30;
         }
+        return numShip;
+    }
 
-        addShips(table, numShip);
-        while (!gameOver) {
-            System.out.println("-------------------------------------");
-            printTable(table, false);
-            int row = getRow(input);
-            int col = getFil(input);
-            shots++;
-            if (table[row][col] == 'S') {
-                table[row][col] = 'X';
-                sunk_ship++;
-                if (sunk_ship == numShip){
-                  gameOver = true;
-                }
-            } else {
-                table[row][col] = 'O';
+    private static void initMatrix(char[][] table) {
+        for (int fila = 0; fila < table.length; fila++) {
+            for (int col = 0; col < table[0].length; col++) {
+                table[fila][col] = ' ';
             }
-
-        }
-        if (sunk_ship == numShip) {
-            System.out.println("  ____    _    __  __ _____  __        _____ _   _ ");
-            System.out.println(" / ___|  / \\  |  \\/  | ____| \\ \\      / /_ _| \\ | |");
-            System.out.println("| |  _  / _ \\ | |\\/| |  _|    \\ \\ /\\ / / | ||  \\| |");
-            System.out.println("| |_| |/ ___ \\| |  | | |___    \\ V  V /  | || |\\  |");
-            System.out.println(" \\____/_/   \\_\\_|  |_|_____|    \\_/\\_/  |___|_| \\_|");
-            System.out.println("You have fired " + shots + "times to win");
         }
     }
 
@@ -85,6 +103,7 @@ public class ej11 {
                     }else {
                         System.out.print(tabla[row][col]);
                     }
+
                 }
                 System.out.print(" | ");
             }
@@ -97,7 +116,7 @@ public class ej11 {
 
 
     static int getRow(Scanner input) {
-        System.out.print("Dame la letra de la fila: ");
+        System.out.print("Dame la letra de la fila (en mayúsculas): ");
         char letter = input.next().charAt(0);
         int row = letter - 65;
         return row;
